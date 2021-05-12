@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Transaction;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -65,5 +66,14 @@ class RegisteredUserController extends Controller
         auth()->user()->update(['current_location_id' => $location_id]);
 
         return redirect()->route('dashboard');
+    }
+
+    public function dashboard()
+    {
+        $transactions = Transaction::where('location_id', auth()->user()->current_location_id)
+            ->latest()
+            ->get();
+
+        return view('dashboard', compact('transactions'));
     }
 }
