@@ -58,6 +58,12 @@ class RegisteredUserController extends Controller
 
     public function change_location($location_id)
     {
-        //
+        if (!auth()->user()->locations->contains($location_id)) {
+            abort(403);
+        }
+
+        auth()->user()->update(['current_location_id' => $location_id]);
+
+        return redirect()->route('dashboard');
     }
 }
