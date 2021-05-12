@@ -46,4 +46,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Location::class);
     }
+
+    public function current_location()
+    {
+        return $this->belongsTo(Location::class, 'current_location_id');
+    }
 }

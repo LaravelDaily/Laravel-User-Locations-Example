@@ -55,4 +55,9 @@ class RegisteredUserController extends Controller
 
         return redirect(RouteServiceProvider::HOME);
     }
+
+    public function change_location($location_id)
+    {
+        //
+    }
 }
